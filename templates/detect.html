@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TrashDetect</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='image/icon1.svg') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}">
+    <script src="{{url_for('static',filename='js/jquery-3.6.0.js')}}"></script>
+    <script>
+        $(document).ready(function(e){
+            $('#uploadbtn').on('click',function(){
+                var form_data=new FormData();
+                var ins = document.getElementById('single_img').files.length;
+                if(ins==0){
+                    $('#select_img').html('<span style="color: darkblue;">请选择一个文件</span>')
+                    return;
+                }
+                form_data.append("img",document.getElementById('single_img').files[0]);
+                $.ajax({
+                    url: '/upload_img',
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    success: function(response){
+                        $('#select_img').html('');
+                        $.each(response, function (key, data){
+                            if(key=='imgPath_for_js'){
+                                $('#select_img').css('background-image',data);
+                            }
+                            if(key=='err_message'){
+                                var str1= '<span style="color: darkblue;">'+data+'</span>';
+                                $('#select_img').html(str1);
+                            }
+                        })
+                    },
+
+                    error:function(jqxhr,textStatus,error){
+                        console.log(jqxhr.responseJSON);
+                        data = jqxhr.responseJSON['err_message'];
+                        var str1= '<span style="color: darkblue;">'+data+'</span>';
+                        $('#select_img').html(str1);
+                    }
+                });
+
+                });
+            $('#detectbtn').on('click',function(){
+            $.ajax({
+                url: '/detect_img',
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'post',
+                success: function(response){
+                    $('#detect_img').html('');
+                    $.each(response, function (key, data){
+                        if(key=='detectedImgPath_for_js'){
+                            $('#detect_img').css('background-image',data);
+                        }
+                        if(key=='detailInfo'){
+                            var i=0;
+                            var str ='<tr><th>类别</th><th>置信度</th><th>分类</th></tr>';
+                            for(var i=0;i<data.length;i++){
+                                str = str+'<tr><td>'+data[i][0]+'</td><td>'+data[i][1]+'</td><td>'+data[i][2]+'</td></tr>';
+                                $('#detectinfor').html(str);
+                            }
+                        }
+                    })
+                },
+                error: function(response){
+                }
+
+            });
+
+            });
+                });
+    </script>
+
+</head>
+<body>
+    <div class="header">
+        <div class="topicon">
+            <img class="iconImg"src="./static/image/icon2.png">
+            <p>TRASH DETECT</p>
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="{{url_for('index')}}">首页</a></li>
+                <li><a href="">开始检测</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <div class="detectfile">
+            <div class="select_img"id="select_img">
+            </div>
+
+            <form>
+                <input class="single_img" id="single_img"name="img"type="file"multiple="multiple">
+                <input class="uploadbtn" id="uploadbtn"type="button"value="上传图片">
+                <input class="detectbtn" id="detectbtn"type="button"value="检测图片">
+            </form>
+            <div class="detect_img"id="detect_img">
+            </div>
+        </div>
+        <table class="detectinfor"id="detectinfor" border="1" cellspacing="0">
+            <tr>
+                <th>类别</th>
+                <th>置信度</th>
+                <th>分类</th>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <small> &copy; 2022 <a href="123456" title="Written by Yixuan Zeng">Yixuan Zeng</a> /
+            <a href="123456" title="Fork me on GitHub">GitHub</a> /
+            <a href="123456" title="A TrashDetect project">TrashDetect</a>
+        </small>
+    </div>
+</body>
+</html>

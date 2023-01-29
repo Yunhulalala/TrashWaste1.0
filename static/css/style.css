@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 1200px;
+
+}
+.topicon{
+    margin: 0 auto;
+    width: 1200px;
+    height: 150px;
+}
+.iconImg{
+    display: block;
+    margin: 0 auto;
+    background-color: #DBE4DE;
+    border: 3px solid #B1BE98;
+    border-radius:50%;
+    transition-duration: 0.5s;
+}
+.iconImg:hover
+{
+    padding: 5px;
+}
+.header p{
+    margin: 0 auto;
+    text-align: center;
+    font: 28px/60px "微软雅黑" ;
+    border-bottom: 3px solid #A3A3A3;
+}
+.nav{
+    margin: 0 auto;
+    height: 50px;
+}
+.nav ul{
+    float: left;
+    height: 50px;
+    position:relative;
+    left:50%;
+}
+.nav ul li{
+    float: left;
+    list-style:none;
+    margin-left: 20px;
+    font: 18px/40px "微软雅黑" ;
+    position:relative;
+    left:-50%;
+}
+.nav a:visited{
+    color:#000000;
+    text-decoration: none;
+}
+
+.nav a:link{
+    color:orange;
+    text-decoration: none;
+}
+.nav a:active{
+    color:orange;
+    text-decoration: none;
+}
+
+/*鼠标悬停，放到标签上的时候*/
+.nav a:hover{
+    color:green;
+    text-decoration: none;
+}
+
+.main{
+    margin: 0 auto;
+    width: 1200px;
+    height: 500px;
+    padding-top: 30px;
+}
+.contain{
+    width: 100%;
+    margin: 0 auto;
+    height: 400px;
+}
+.left_img{
+    float: left;
+    background-image: url(../image/1.svg);
+    width: 550px;
+    height: 275px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.right_img{
+    float: right;
+    background-image: url(../image/2.svg);
+    width: 550px;
+    height: 275px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.startbtn
+{
+    display: block;
+    margin: 0 auto;
+    background-color: #5C824C;
+    border: 2px solid #B1BE98;
+    font: 20px "微软雅黑";
+    color: #FFFFFF;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 10px 10px 10px 0 gainsboro;
+    transition-duration: 0.5s;
+
+}
+.startbtn:hover{
+    padding: 17px 19px;
+    box-shadow: 15px 15px 15px 0 gainsboro;
+}
+.footer{
+    margin: 0 auto;
+    width: 100%;
+    height: 5%;
+    position: fixed;  /*绝对定位*/
+	left: 0px;  /*横坐标*/
+	bottom: 0px;  /*纵坐标*/
+    background-color: #5C824C;
+    text-align: center;
+    color: #FFFFFF;
+}
+small a:hover{
+    color: rgb(219, 219, 175);
+}
+small a:link{
+    color: #bbddc2;
+}
+
+
+
